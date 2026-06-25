@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebApplication2.Models.Account>
+
+@{
+    ViewBag.Title = "Balance";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Balance</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f4f7fc;
+            font-family: 'Segoe UI';
+        }
+
+        .container-box {
+            width: 90%;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 3px 10px rgba(0,0,0,.1);
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-box">
+
+        <h2>💰 Account Balances</h2>
+
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                    <th>Status</th>
+                    <th>Open Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.AccountNumber</td>
+                        <td>Rs. @item.Balance</td>
+                        <td>@item.Status</td>
+                        <td>@item.OpenDate</td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+        <a href="/Customer/Dashboard" class="btn btn-primary">
+            Back To Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

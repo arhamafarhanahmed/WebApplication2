@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Loans Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">🏦 Loans Dashboard</h2>
+        <p class="text-muted">Manage loan applications and history</p>
+    </div>
+
+    <!-- Centered Card -->
+    <div class="row justify-content-center">
+
+        <!-- LOAN HISTORY -->
+        <div class="col-md-6">
+            <div class="card shadow border-0 text-center p-4">
+
+                <div style="font-size:40px;">📊</div>
+
+                <h4 class="mt-2">Loan History</h4>
+
+                <p class="text-muted">
+                    View, approve, reject and manage loans
+                </p>
+
+                <a href="@Url.Action("History", "Loans")"
+                   class="btn btn-success px-4">
+                    View History
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,136 @@
+﻿@model IEnumerable<WebApplication2.Models.CustomerDocument>
+
+@{
+    ViewBag.Title = "Customer Documents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .table td, .table th {
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .btn {
+        margin: 2px;
+    }
+</style>
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">📁 Customer Documents</h2>
+        <p class="text-muted">All uploaded customer files</p>
+    </div>
+
+    <!-- TABLE CARD -->
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">📂 Documents List</h5>
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Customer</th>
+                            <th>Document Type</th>
+                            <th>File Name</th>
+                            <th>Upload Date</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <!-- CUSTOMER (FIX WRAP ISSUE) -->
+                                    <td class="fw-semibold text-wrap">
+                                        @(item.Customer != null ? item.Customer.FirstName : "N/A")
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-info text-dark">
+                                            @item.DocumentType
+                                        </span>
+                                    </td>
+
+                                    <td class="text-wrap">
+                                        @item.FileName
+                                    </td>
+
+                                    <td>
+                                        @(item.UploadDate.HasValue
+                                            ? item.UploadDate.Value.ToString("dd-MMM-yyyy")
+                                            : "-")
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        @if (!string.IsNullOrEmpty(item.FilePath))
+                                        {
+                                            <a href="@item.FilePath" target="_blank"
+                                               class="btn btn-sm btn-primary">
+                                                👁 View
+                                            </a>
+
+                                            <a href="@item.FilePath" download
+                                               class="btn btn-sm btn-success">
+                                                ⬇ Download
+                                            </a>
+                                        }
+
+                                        <a href="@Url.Action("Delete", "CustomerDocuments", new { id = item.DocumentID })"
+                                           class="btn btn-sm btn-danger">
+                                            🗑 Delete
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    No documents found
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="mt-3">
+        <a href="/Admin/Dashboard" class="btn btn-secondary">
+            ← Back To Dashboard
+        </a>
+
+
+    </div>
+
+</div>
