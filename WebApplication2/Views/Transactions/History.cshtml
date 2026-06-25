@@ -1,0 +1,147 @@
+﻿@model IEnumerable<WebApplication2.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transaction History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">📊 Transaction History</h2>
+        <p class="text-muted">Search, filter and view all transactions</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="card shadow-sm border-0 mb-4 p-3">
+
+        <div class="row">
+
+            <div class="col-md-4 mb-2">
+                <input type="text" id="searchBox" class="form-control" placeholder="🔍 Search account, type, description...">
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <select id="typeFilter" class="form-control">
+                    <option value="">All Types</option>
+                    <option value="Deposit">Deposit</option>
+                    <option value="Withdraw">Withdraw</option>
+                    <option value="Transfer">Transfer</option>
+                    <option value="Bill Payment">Bill Payment</option>
+                    <option value="Fee Charge">Fee Charge</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <input type="date" id="dateFilter" class="form-control">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card shadow border-0">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped mb-0" id="txnTable">
+
+                <thead class="table-primary">
+                    <tr>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Account</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold text-success">
+                                @item.Amount
+                            </td>
+
+                            <td>
+                                @item.Description
+                            </td>
+
+                            <td data-date="@(item.TransactionDate?.ToString("yyyy-MM-dd"))">
+                                @(item.TransactionDate.HasValue
+        ? item.TransactionDate.Value.ToString("dd-MMM-yyyy")
+        : "-")
+                            </td>
+
+                            <td>
+                                @item.Account.AccountNumber
+                            </td>
+
+                            <td>
+                                <span class="badge bg-info text-dark">
+                                    @item.TransactionType.TypeName
+                                </span>
+                            </td>
+
+                            <td>
+                                <a href="@Url.Action("Details", "Transactions", new { id = item.TransactionID })"
+                                   class="btn btn-sm btn-primary">
+                                    View
+                                </a>
+                                <a href="@Url.Action("Delete", "Transactions", new { id = item.TransactionID })"
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Are you sure you want to delete this transaction?');">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const searchBox = document.getElementById("searchBox");
+        const typeFilter = document.getElementById("typeFilter");
+        const dateFilter = document.getElementById("dateFilter");
+
+        const rows = document.querySelectorAll("#txnTable tbody tr");
+
+        function filterTable() {
+
+            let search = searchBox.value.toLowerCase();
+            let type = typeFilter.value.toLowerCase();
+            let date = dateFilter.value; // yyyy-mm-dd
+
+            rows.forEach(row => {
+
+                let text = row.innerText.toLowerCase();
+
+                // ✔ proper date from td attribute
+                let rowDate = row.querySelector("td[data-date]")?.getAttribute("data-date");
+
+                let matchSearch = text.includes(search);
+                let matchType = type === "" || text.includes(type);
+                let matchDate = date === "" || rowDate === date;
+
+                row.style.display =
+                    (matchSearch && matchType && matchDate) ? "" : "none";
+            });
+        }
+
+        searchBox.addEventListener("keyup", filterTable);
+        typeFilter.addEventListener("change", filterTable);
+        dateFilter.addEventListener("change", filterTable);
+
+    });
+</script>

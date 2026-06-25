@@ -1,0 +1,101 @@
+﻿@model WebApplication2.Models.Transaction
+
+@{
+    ViewBag.Title = "Create Transaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>💳 Create Transaction</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <!-- FROM ACCOUNT -->
+                        <div class="mb-3">
+                            <label>Select Account</label>
+                            @Html.DropDownList("AccountID", null, "-- Select Account --",
+                                new { @class = "form-control", id = "fromAccount" })
+                        </div>
+
+                        <!-- TYPE -->
+                        <div class="mb-3">
+                            <label>Transaction Type</label>
+                            @Html.DropDownList("TransactionTypeID", null, "-- Select Type --",
+                                new { @class = "form-control", id = "txnType" })
+                        </div>
+
+                        <!-- AMOUNT -->
+                        <div class="mb-3">
+                            <label>Amount</label>
+                            @Html.TextBoxFor(m => m.Amount,
+                                new { @class = "form-control", type = "number", min = "1" })
+                        </div>
+
+                        <!-- DESCRIPTION -->
+                        <div class="mb-3">
+                            <label>Description</label>
+                            @Html.TextBoxFor(m => m.Description,
+                                new { @class = "form-control" })
+                        </div>
+
+                        <!-- ✅ BENEFICIARY (TRANSFER ONLY) -->
+                        <div class="mb-3" id="beneficiaryBox" style="display:none;">
+                            <label>Select Beneficiary</label>
+                            @Html.DropDownList("BeneficiaryID", null,
+                                "-- Select Beneficiary --",
+                                new { @class = "form-control" })
+                        </div>
+
+                        <!-- INFO -->
+                        <div class="alert alert-info">
+                            <span id="infoText">Select transaction type</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            Submit Transaction
+                        </button>
+                    }
+
+                </div>
+            </div>
+            <div class="mt-3">
+                <a href="@Session["DashboardUrl"]" class="btn btn-secondary">
+                    ← Back To Dashboard
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("txnType").addEventListener("change", function () {
+
+        var val = this.value;
+        var box = document.getElementById("beneficiaryBox");
+        var info = document.getElementById("infoText");
+
+        if (val == "3") {
+            box.style.display = "block";
+            info.innerText = "Transfer → Select Beneficiary";
+        }
+        else {
+            box.style.display = "none";
+        }
+
+    });
+</script>

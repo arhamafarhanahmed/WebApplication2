@@ -1,0 +1,143 @@
+﻿
+@model WebApplication2.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background: #f4f6f9;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .details-container {
+        max-width: 900px;
+        margin: 30px auto;
+    }
+
+    .details-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+        color: #1e3a8a;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    h4 {
+        color: #374151;
+        margin-bottom: 15px;
+    }
+
+    hr {
+        border-top: 1px solid #d1d5db;
+    }
+
+    .dl-horizontal dt {
+        color: #1f2937;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    .dl-horizontal dd {
+        color: #4b5563;
+        margin-bottom: 12px;
+    }
+
+    .action-links {
+        margin-top: 20px;
+    }
+
+        .action-links a {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #fff !important;
+            margin-right: 8px;
+        }
+
+            .action-links a:first-child {
+                background: #f59e0b;
+            }
+
+            .action-links a:last-child {
+                background: #2563eb;
+            }
+
+            .action-links a:hover {
+                opacity: 0.9;
+                text-decoration: none;
+            }
+</style>
+
+<div class="details-container">
+
+    <h2>Details</h2>
+
+    <div class="details-card">
+
+        <h4>User</h4>
+        <hr />
+
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PasswordHash)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PasswordHash)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Role.RoleName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Role.RoleName)
+            </dd>
+
+        </dl>
+
+    </div>
+
+    <div class="action-links">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserID })
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</div>
+```

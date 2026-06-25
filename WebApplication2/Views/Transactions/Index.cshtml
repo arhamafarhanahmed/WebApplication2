@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Transactions Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">🏦 Transactions Dashboard</h2>
+        <p class="text-muted">Select an option to proceed</p>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <!-- 💳 Manage Transactions -->
+        <div class="col-md-5 mb-4">
+
+            <a href="@Url.Action("Create", "Transactions")" class="text-decoration-none">
+
+                <div class="card border-0 shadow-lg text-center p-5 hover-card">
+
+                    <div style="font-size:60px;">💳</div>
+
+                    <h4 class="mt-3 text-success fw-bold">
+                        Manage Transactions
+                    </h4>
+
+                    <p class="text-muted">
+                        Deposit • Withdraw • Transfer • Bill Payment
+                    </p>
+
+                    <span class="btn btn-success mt-2">
+                        Go to Transactions
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- 📊 Transaction History -->
+        <div class="col-md-5 mb-4">
+
+            <a href="@Url.Action("History", "Transactions")" class="text-decoration-none">
+                
+       
+
+                <div class="card border-0 shadow-lg text-center p-5 hover-card">
+
+                    <div style="font-size:60px;">📊</div>
+
+                    <h4 class="mt-3 text-primary fw-bold">
+                        Transaction History
+                    </h4>
+
+                    <p class="text-muted">
+                        View all past transactions & records
+                    </p>
+
+                    <span class="btn btn-primary mt-2">
+                        View History
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🎨 Hover Styling -->
+<style>
+    .hover-card {
+        border-radius: 18px;
+        transition: 0.3s ease-in-out;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+</style>

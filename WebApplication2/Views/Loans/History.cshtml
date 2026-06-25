@@ -1,0 +1,136 @@
+﻿@model IEnumerable<WebApplication2.Models.Loan>
+
+@{
+    ViewBag.Title = "Loan History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Loan History</h2>
+
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Customer</th>
+                        <th>Loan Type</th>
+                        <th>Amount</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                        <th>Apply Date</th>
+                        <th width="300">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.LoanID</td>
+
+                                <td>
+                                    @(item.Customer != null
+                                    ? item.Customer.FirstName + " " + item.Customer.LastName
+                                    : "")
+                                </td>
+
+                                <td>
+                                    @(item.LoanType != null
+                                    ? item.LoanType.LoanTypeName
+                                    : "")
+                                </td>
+
+                                <td>@item.Amount</td>
+
+                                <td>@item.DurationMonths Months</td>
+
+                                <td>
+                                    @if (item.Status == "Approved")
+                                    {
+                                        <span class="badge bg-success">Approved</span>
+                                    }
+                                    else if (item.Status == "Rejected")
+                                    {
+                                        <span class="badge bg-danger">Rejected</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    @(item.ApplyDate != null
+                                    ? Convert.ToDateTime(item.ApplyDate).ToString("dd-MMM-yyyy")
+                                    : "")
+                                </td>
+
+                                <td>
+
+                                    <a href="@Url.Action("Details","Loans", new { id = item.LoanID })"
+                                       class="btn btn-info btn-sm">
+                                        Details
+                                    </a>
+
+                                    <a href="@Url.Action("Approve","Loans", new { id = item.LoanID })"
+                                       class="btn btn-success btn-sm"
+                                       onclick="return confirm('Approve this loan?')">
+                                        Approve
+                                    </a>
+
+                                    <a href="@Url.Action("Reject","Loans", new { id = item.LoanID })"
+                                       class="btn btn-warning btn-sm"
+                                       onclick="return confirm('Reject this loan?')">
+                                        Reject
+                                    </a>
+
+                                    <a href="@Url.Action("Delete","Loans", new { id = item.LoanID })"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Delete this loan?')">
+                                        Delete
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center">
+                                No Loan Records Found
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+        
+    </div>
+    <div class="mt-3">
+        <a href="@Session["DashboardUrl"]" class="btn btn-secondary">
+            ← Back To Dashboard
+        </a>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,87 @@
+﻿@model WebApplication2.Models.Transaction
+
+@{
+    ViewBag.Title = "Transaction Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-4">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+
+            <!-- CARD -->
+            <div class="card border-0 shadow-lg rounded-4">
+
+                <!-- HEADER -->
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0 fw-bold">💳 Transaction Details</h4>
+                </div>
+
+                <!-- BODY -->
+                <div class="card-body p-4">
+
+                    <!-- AMOUNT -->
+                    <div class="text-center mb-4">
+                        <h6 class="text-muted">Transaction Amount</h6>
+                        <h2 class="text-success fw-bold">
+                            Rs. @Model.Amount
+                        </h2>
+                    </div>
+
+                    <hr />
+
+                    <!-- DETAILS -->
+                    <div class="row mb-2">
+                        <div class="col-5 fw-semibold text-muted">Description</div>
+                        <div class="col-7">@Model.Description</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-5 fw-semibold text-muted">Transaction Date</div>
+                        <div class="col-7">
+                            @(Model.TransactionDate.HasValue
+                                ? Model.TransactionDate.Value.ToString("dd-MMM-yyyy hh:mm tt")
+                                : "N/A")
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-5 fw-semibold text-muted">Account Number</div>
+                        <div class="col-7">
+                            @Model.Account.AccountNumber
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-5 fw-semibold text-muted">Transaction Type</div>
+                        <div class="col-7">
+                            <span class="badge bg-primary">
+                                @Model.TransactionType.TypeName
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- BUTTONS -->
+                    <div class="d-flex justify-content-between">
+
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary px-4">
+                            ← Back
+                        </a>
+
+                        <a href="@Url.Action("Edit", new { id = Model.TransactionID })"
+                           class="btn btn-success px-4">
+                            ✏️ Edit
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

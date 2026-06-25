@@ -1,0 +1,98 @@
+﻿@model WebApplication2.Models.Loan
+
+@{
+    ViewBag.Title = "Apply Loan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>🏦 Apply Loan</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <!-- CUSTOMER -->
+                    <div class="mb-3">
+                        <label class="form-label">Customer Name</label>
+
+                        <input type="text"
+                               class="form-control"
+                               value="@ViewBag.CustomerName"
+                               readonly />
+                    </div>
+
+                        <!-- LOAN TYPE -->
+                        <div class="mb-3">
+                            <label class="form-label">Loan Type</label>
+
+                            @Html.DropDownList(
+                                "LoanTypeID",
+                                ViewBag.LoanTypeID as SelectList,
+                                "-- Select Loan Type --",
+                                new { @class = "form-control" }
+                            )
+
+                            @Html.ValidationMessageFor(m => m.LoanTypeID, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- AMOUNT -->
+                        <div class="mb-3">
+                            <label class="form-label">Amount</label>
+
+                            @Html.TextBoxFor(m => m.Amount, new
+                            {
+                                @class = "form-control",
+                                type = "number",
+                                placeholder = "Enter amount"
+                            })
+
+                            @Html.ValidationMessageFor(m => m.Amount, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- DURATION -->
+                        <div class="mb-3">
+                            <label class="form-label">Duration (Months)</label>
+
+                            @Html.TextBoxFor(m => m.DurationMonths, new
+                            {
+                                @class = "form-control",
+                                type = "number",
+                                placeholder = "Enter months"
+                            })
+
+                            @Html.ValidationMessageFor(m => m.DurationMonths, "", new { @class = "text-danger" })
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            Apply Loan
+                        </button>
+
+                        <a href="@Url.Action("Loans","Customer")"
+                           class="btn btn-outline-secondary w-100 mt-2">
+                            Back
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

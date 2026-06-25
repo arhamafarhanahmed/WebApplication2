@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="edd274b6db0f4b7491036b49f530b46d" Name="Diagram1">
+        <EntityTypeShape EntityType="BMSModel.Account" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.AccountType" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.AuditLog" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Beneficiary" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Branch" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.CustomerDocument" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Customer" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.DebitCard" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Employee" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Loan" Width="1.5" PointX="11.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.LoanType" Width="1.5" PointX="9" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Role" Width="1.5" PointX="1.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Transaction" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.TransactionType" Width="1.5" PointX="6" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.User" Width="1.5" PointX="3.75" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="BMSModel.FK_Accounts_AccountTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Accounts_Branches" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Accounts_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Beneficiaries_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_DebitCards_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Transactions_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_AuditLogs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Beneficiaries_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Customers_Branches" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Employees_Branches" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_CustomerDocuments_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Customers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Loans_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Loans_LoanTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Transactions_TransactionTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
