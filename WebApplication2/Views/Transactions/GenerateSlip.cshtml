@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplication2.Models.Transaction>
+
+@{
+    ViewBag.Title = "Generate Slip";
+}
+
+<h2>Transaction History</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TransactionID</td>
+                <td>@item.Amount</td>
+
+                <td>
+                    @(item.TransactionType != null
+                        ? item.TransactionType.TypeName
+                        : "N/A")
+                </td>
+
+                <td>@item.TransactionDate</td>
+
+                <td>
+                    <a href="/Transactions/Slip/@item.TransactionID"
+                       class="btn btn-success">
+                        Generate Slip
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Session["DashboardUrl"]" class="btn btn-secondary">
+    ← Back To Dashboard
+</a>
